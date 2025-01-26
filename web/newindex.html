@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Untitled</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <script src="https://www.desmos.com/api/v1.4/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script> -->
+        <script type="text/javascript" src="calculator.js"></script>
+    </head>
+    <body style="margin: 0;">
+        
+        <div style="line-height: 46px;">
+            <input id="file" type="file" accept=".json" style="display: none;"/>
+            &nbsp;<button id="load" class="bs">load</button>
+            <button id="save" class="bs">save</button>
+            <input id="title" type="text" value="racisim is fun" class="ibar">
+        </div>
+        <div id="calculator" style="position: absolute; top: 46px; bottom: 0; left: 0; right: 0;"></div>
+        <script>            
+            window.Calc = Desmos.GraphingCalculator(document.querySelector('#calculator'));
+            
+            function loadDesmosState(jsonString){
+                var state = JSON.parse(jsonString);
+                window.Calc.setState(state);
+            };
+            
+            document.querySelector('#file').onchange = function(e){
+                let file = e.target.files[0];
+                name = file.name.replace(/\.(json|JSON)$/, '');
+                document.querySelector('#title').value = name;
+                document.querySelector('head>title').text = name;
+                let reader = new FileReader();
+                reader.onload = function(e){
+                    loadDesmosState(e.target.result);
+                };
+                reader.readAsText(file);
+            };
+            
+            document.querySelector('#load').onclick = function(e){
+                document.querySelector('#file').click();
+            };
+            
+            function download(content, fileName, contentType) {
+                let a = document.createElement('a');
+                a.href = URL.createObjectURL(new Blob([content], {type: contentType}));
+                a.download = fileName;
+                a.click();
+            };
+            
+            document.querySelector('#save').onclick = function(e){
+                let state = JSON.stringify(window.Calc.getState());
+                let title = document.querySelector('#title').value;
+                download(state, title+'.json', 'text/plain');
+            };
+        </script>
+        <style>
+            /* i hate css so i have the full right to make it all ai*/
+            /* racisim is fun*/
+            .bs {
+                background-color: #4CAF50; /* Modern green color */
+                color: white; /* Text color */
+                font-size: 1rem; /* Maintain text size */
+                font-weight: bold; /* Make the text bold */
+                border: none; /* Remove default borders */
+                border-radius: 8px; /* Rounded corners */
+                padding: 8px 16px; /* Reduced padding for shorter height */
+                cursor: pointer; /* Pointer cursor on hover */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+                transition: all 0.3s ease-in-out; /* Smooth transition */
+              }
+              
+              .bs:hover {
+                background-color: #45a049; /* Darker green on hover */
+                box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Slightly larger shadow */
+                transform: translateY(-2px); /* Subtle lift effect */
+              }
+              
+              .bs:active {
+                background-color: #3e8e41; /* Even darker green for active state */
+                transform: translateY(0); /* Reset lift effect */
+                box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* Slightly recessed shadow */
+              }
+              
+              .ibar{
+                font-size: large;
+              }
+        </style>
+    </body>
+</html>
+
+<!-- TODO: -->
+<!-- load multiple scripts / import -->

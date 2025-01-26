@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script src="eel.js"></script>
+        <script>
+            window.onbeforeunload = () => {
+              // Call the Python function to close the server
+              eel.close_server();
+            };
+          </script>
+        <!-- css is GAY -->
+        <!-- i put it on an Ifream cuz i dont want the scroll and I'm to cssphobic to read the css code -->
+        <iframe src="./newindex.html" frameborder="0" scrolling="no"></iframe>
+        <style>
+            iframe{
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </body>
+</html>
+
+<!-- TODO: -->
+<!-- load multiple scripts / import -->
