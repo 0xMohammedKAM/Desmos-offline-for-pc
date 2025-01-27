@@ -3,3 +3,6 @@ I found this Desmos HTML code on GitHub, so I used Python Eel to make it a deskt
 
 Thanks to [Ashu](https://github.com/e841018) for whatever witchcraft you did there. I also want to thank the Desmos developers, but why didn't you just make a desktop version? I know you have a version for Chromebooks 
 not everyone has a consistent internet connection.
+
+Yeah I forgot ... you need chrome installed.
+and CSS is GAY
